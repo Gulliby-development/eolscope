@@ -4,9 +4,16 @@ use crate::text::show;
 
 pub const USAGE: &str = "usage: eolscope lines PROFILE FILE\nusage: eolscope agree FILE...\nusage: eolscope kinds FILE...\nusage: eolscope where OFFSET FILE\nusage: eolscope trim [--all] PROFILE FILE...\nusage: eolscope chars [CODE...]\nusage: eolscope convert [--final-newline] [--strip-bom] FROM TO FILE\nusage: eolscope check POLICY FILE...\n";
 
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 pub fn run(argv: &[String], io: &dyn Io) -> i32 {
     if matches!(argv, [argument] if argument == "--help") {
         io.out(USAGE);
+        return 0;
+    }
+
+    if matches!(argv, [argument] if argument == "--version") {
+        io.out(&format!("eolscope {VERSION}\n"));
         return 0;
     }
 
