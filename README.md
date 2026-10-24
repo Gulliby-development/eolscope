@@ -30,6 +30,8 @@ eolscope --help
 
 When working directly from the checkout, `cargo run -- --help` displays the same help text.
 
+`eolscope --version` prints the program name and version, such as `eolscope 0.1.0`, and exits with 0. Like `--help`, it is accepted only as the single argument.
+
 ## Usage
 
 Each example assumes a UTF-8 file named `t.txt` with the explicitly described contents. The examples use the installed `eolscope` command.
@@ -219,6 +221,8 @@ cargo test
 ```
 
 These checks use the Rust toolchain and the project's standard-library-only dependencies.
+
+The published crate leaves out the `.github` folder and `.gitattributes`; `cargo package --list` shows the files it holds.
 
 ## License
 
