@@ -234,7 +234,7 @@ fn line_validation_and_option_precedence() {
 
 #[test]
 fn agree_validation_and_option_precedence() {
-    assert_eq!(cmd_agree::USAGE, "agree FILE...");
+    assert_eq!(cmd_agree::USAGE, "agree [--differ] FILE...");
     let io = FakeIo {
         files: Vec::new(),
         stdin: Vec::new(),
@@ -244,7 +244,7 @@ fn agree_validation_and_option_precedence() {
 
     assert_eq!(
         cmd_agree::run(&[], &io),
-        Err(EsError("usage: agree FILE...".to_string()))
+        Err(EsError("usage: agree [--differ] FILE...".to_string()))
     );
     assert_eq!(
         cmd_agree::run(&["--help".to_string()], &io),

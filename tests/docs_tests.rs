@@ -30,7 +30,7 @@ fn commands_section_lists_every_exact_usage_line() {
 
     for usage in [
         "usage: eolscope lines PROFILE FILE",
-        "usage: eolscope agree FILE...",
+        "usage: eolscope agree [--differ] FILE...",
         "usage: eolscope kinds FILE...",
         "usage: eolscope where OFFSET FILE",
         "usage: eolscope trim [--all] PROFILE FILE...",
