@@ -4,7 +4,7 @@ use crate::options;
 use crate::profile::Profile;
 use crate::splitter;
 
-pub const USAGE: &str = "agree FILE...";
+pub const USAGE: &str = "agree [--differ] FILE...";
 
 pub fn summary(display: &str, text: &str) -> (String, bool) {
     let counts = Profile::ALL.map(|profile| splitter::split(text, profile).len());
@@ -20,7 +20,8 @@ pub fn summary(display: &str, text: &str) -> (String, bool) {
 }
 
 pub fn run(args: &[String], io: &dyn Io) -> Result<i32, EsError> {
-    let parsed = options::parse(args, &[])?;
+    let parsed = options::parse(args, &["--differ"])?;
+    let differ_only = parsed.flags.contains("--differ");
     if parsed.args.is_empty() {
         return Err(EsError(format!("usage: {USAGE}")));
     }
@@ -34,6 +35,9 @@ pub fn run(args: &[String], io: &dyn Io) -> Result<i32, EsError> {
         let (line, agree) = summary(&source.display, &source.text);
         if !agree {
             all_agree = false;
+        }
+        if differ_only && agree {
+            continue;
         }
         output.push_str(&line);
         output.push('\n');

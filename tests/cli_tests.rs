@@ -34,7 +34,7 @@ impl eolscope::io::Io for FakeIo {
 fn help_is_exact_and_written_without_error() {
     assert_eq!(
         USAGE,
-        "usage: eolscope lines PROFILE FILE\nusage: eolscope agree FILE...\nusage: eolscope kinds FILE...\nusage: eolscope where OFFSET FILE\nusage: eolscope trim [--all] PROFILE FILE...\nusage: eolscope chars [CODE...]\nusage: eolscope convert [--final-newline] [--strip-bom] FROM TO FILE\nusage: eolscope check POLICY FILE...\n"
+        "usage: eolscope lines PROFILE FILE\nusage: eolscope agree [--differ] FILE...\nusage: eolscope kinds FILE...\nusage: eolscope where OFFSET FILE\nusage: eolscope trim [--all] PROFILE FILE...\nusage: eolscope chars [CODE...]\nusage: eolscope convert [--final-newline] [--strip-bom] FROM TO FILE\nusage: eolscope check POLICY FILE...\n"
     );
     let io = FakeIo {
         files: Vec::new(),
@@ -416,7 +416,7 @@ fn validation_errors_follow_the_cli_envelope() {
     assert_eq!(io.out.borrow().as_str(), "");
     assert_eq!(
         io.err.borrow().as_str(),
-        "eolscope: unknown option \"--oops\"\neolscope: usage: agree FILE...\neolscope: usage: trim [--all] PROFILE FILE...\neolscope: unknown profile \"LF\"\neolscope: unknown style \"tab\"\neolscope: invalid offset \"007\"\neolscope: offset 9 is beyond the end (2 characters)\neolscope: conflicting items final and nofinal\n"
+        "eolscope: unknown option \"--oops\"\neolscope: usage: agree [--differ] FILE...\neolscope: usage: trim [--all] PROFILE FILE...\neolscope: unknown profile \"LF\"\neolscope: unknown style \"tab\"\neolscope: invalid offset \"007\"\neolscope: offset 9 is beyond the end (2 characters)\neolscope: conflicting items final and nofinal\n"
     );
 }
 

@@ -67,6 +67,8 @@ Output:
 t.txt: lf=1 go=1 rust=1 universal=2 js=2 python=2 unicode=2 differ
 ```
 
+Give `agree` many files and add `--differ` to list only the ones that disagree; when none do, nothing is printed and the exit status is `0`. The exit status does not depend on the flag, and the flag may come before or after the files.
+
 ### Inventory terminators
 
 Fixture: `t.txt` contains `a<LF>b<CR><LF>c<U+0085>d<U+2028>e<U+2029>`.
@@ -180,7 +182,7 @@ The help output presents these exact usage lines in this order:
 
 ```text
 usage: eolscope lines PROFILE FILE
-usage: eolscope agree FILE...
+usage: eolscope agree [--differ] FILE...
 usage: eolscope kinds FILE...
 usage: eolscope where OFFSET FILE
 usage: eolscope trim [--all] PROFILE FILE...
@@ -198,7 +200,7 @@ The five whitespace rules are `js-trim`, `py-strip`, `rs-trim`, `java-trim` and 
 Command reference:
 
 - `lines PROFILE FILE` lists line number, terminator, content length and displayed content for one file.
-- `agree FILE...` compares line counts across all seven profiles for each file.
+- `agree [--differ] FILE...` compares line counts across all seven profiles for each file. With `--differ`, a file on which all seven profiles agree is left out of the report.
 - `kinds FILE...` inventories terminator kinds, style, final-terminator state and leading BOM state.
 - `where OFFSET FILE` locates a Unicode scalar offset under all profiles. Offsets are canonical decimal, count Unicode scalar values, and may be at most nine digits.
 - `trim [--all] PROFILE FILE...` compares the five trailing-whitespace rules for each line.
